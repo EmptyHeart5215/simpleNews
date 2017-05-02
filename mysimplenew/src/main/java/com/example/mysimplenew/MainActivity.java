@@ -186,25 +186,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    float x;
 
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        Log.e(TAG, "onTouchEvent: " );
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                x = ev.getX();
-                Log.e(TAG, "ACTION_DOWN: "+x );
-                break;
-            case MotionEvent.ACTION_MOVE:
-                if (x > 200) {
-                    Log.e(TAG, "ACTION_MOVE: "+x );
-                    return false;
-                } else return true;
-        }
-
-        return super.onTouchEvent(ev);
-    }
 
     @Override
     protected void onResume() {
