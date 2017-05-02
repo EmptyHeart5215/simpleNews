@@ -74,7 +74,6 @@ public class JuShiRecyclerAdapter extends BaseAdapter{
                 Intent intent =new Intent(context, ContentActivityTwo.class);
                 intent.putExtra("title",newslist.get(position).getTitle());
                 intent.putExtra("url",newslist.get(position).getDocid());
-                Log.e("TAGGGGG", "onClick: "+newslist.get(position).getDocid());
                 //http://c.m.163.com/nc/article/"+url+"/full.html
                 intent.putExtra("imagesrc",newslist.get(position).getImgsrc());
                 context.startActivity(intent);
@@ -83,13 +82,12 @@ public class JuShiRecyclerAdapter extends BaseAdapter{
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ToastUtil.MyToast(context,"长按点击事件");
-                Log.e("onLongClick", "onLongClick: "+newslist.get(position).getUrl_3w()+"getDigest()"+newslist.get(position).getDigest() +"aaa");
-                String url="http://c.m.163.com/nc/article/"+newslist.get(position).getDocid()+"/full.html";
+                String url="http://c.m.163.com/news/a/"+newslist.get(position).getDocid()+".html";
 
                 UMWeb web = new UMWeb(url);
 
                 UMImage image = new UMImage(context, newslist.get(position).getImgsrc());//网络图片
+                UMImage image2 = new UMImage(context, newslist.get(position).getImgsrc());//网络图片
                 web.setTitle(newslist.get(position).getTitle());//标题
                 web.setThumb(image);  //缩略图
                 web.setDescription(newslist.get(position).getDigest());//描述
