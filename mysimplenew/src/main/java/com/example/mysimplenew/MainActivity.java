@@ -36,6 +36,7 @@ import com.example.mysimplenew.fragment.PhotoThree;
 import com.example.mysimplenew.fragment.SettingFragment;
 import com.example.mysimplenew.fragment.WeatherFragment;
 import com.example.mysimplenew.viewpageranimator.MyDrawerLayout;
+import com.umeng.socialize.UMShareAPI;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -144,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 viewById.setText(name);
             }
         }
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

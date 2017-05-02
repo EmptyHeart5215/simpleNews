@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutionException;
  * Created by 红超 on 2017/3/25.
  */
 
-public class NewsRecyclerAdapter extends RecyclerView.Adapter {
+public class NewsRecyclerAdapter extends BaseAdapter{
 
     Context context;
     List<NewsEntity.T1348649503389Bean> newslist;

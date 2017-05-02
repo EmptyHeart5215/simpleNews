@@ -1,5 +1,6 @@
 package com.example.mysimplenew.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +14,17 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.mysimplenew.ContentActivity;
 import com.example.mysimplenew.ContentActivityTwo;
+import com.example.mysimplenew.MainActivity;
 import com.example.mysimplenew.R;
 import com.example.mysimplenew.Utils.LogUtil;
 import com.example.mysimplenew.Utils.ToastUtil;
 import com.example.mysimplenew.entity.JuShiNews;
 import com.example.mysimplenew.entity.NewsEntity;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import java.util.List;
 
@@ -52,17 +59,48 @@ public class JuShiRecyclerAdapter extends BaseAdapter{
     }
 
     @Override
+    public boolean setOnLongClickListener(RecyclerView.ViewHolder holder) {
+
+        return super.setOnLongClickListener(holder);
+    }
+
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        super.onBindViewHolder(holder,position);
         int itemViewType = getItemViewType(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.MyToast(context,"点击");
                 Intent intent =new Intent(context, ContentActivityTwo.class);
                 intent.putExtra("title",newslist.get(position).getTitle());
                 intent.putExtra("url",newslist.get(position).getDocid());
+                Log.e("TAGGGGG", "onClick: "+newslist.get(position).getDocid());
+                //http://c.m.163.com/nc/article/"+url+"/full.html
                 intent.putExtra("imagesrc",newslist.get(position).getImgsrc());
                 context.startActivity(intent);
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ToastUtil.MyToast(context,"长按点击事件");
+                Log.e("onLongClick", "onLongClick: "+newslist.get(position).getUrl_3w()+"getDigest()"+newslist.get(position).getDigest() +"aaa");
+                String url="http://c.m.163.com/nc/article/"+newslist.get(position).getDocid()+"/full.html";
+
+                UMWeb web = new UMWeb(url);
+
+                UMImage image = new UMImage(context, newslist.get(position).getImgsrc());//网络图片
+                web.setTitle(newslist.get(position).getTitle());//标题
+                web.setThumb(image);  //缩略图
+                web.setDescription(newslist.get(position).getDigest());//描述
+
+                new ShareAction((Activity) context).setPlatform(SHARE_MEDIA.SINA)
+                        .withText(newslist.get(position).getTitle())
+                        .withMedia(web)
+                        .setCallback(umShareListener)
+                        .share();
+
+                return true;
             }
         });
         if (itemViewType==0){
@@ -77,6 +115,7 @@ public class JuShiRecyclerAdapter extends BaseAdapter{
         }else {
             MyViewHolderThree holderThree = (MyViewHolderThree) holder;
             holderThree.title.setText(newslist.get(position).getTitle());
+
             Glide.with(context).load(newslist.get(position).getImgsrc()).into(holderThree.photoone);
             Glide.with(context).load(newslist.get(position).getImgextra().get(0).getImgsrc()).into(holderThree.phototwo);
             Glide.with(context).load(newslist.get(position).getImgextra().get(1).getImgsrc()).into(holderThree.photothree);
@@ -88,27 +127,9 @@ public class JuShiRecyclerAdapter extends BaseAdapter{
         return newslist.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView title, time;
-        ImageView photo;
 
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            title = (TextView) itemView.findViewById(R.id.itemtitle);
-            photo = (ImageView) itemView.findViewById(R.id.itemimage);
-            time = (TextView) itemView.findViewById(R.id.itemtime);
-        }
-    }
-    public class MyViewHolderThree extends RecyclerView.ViewHolder {
-        TextView title;
-        ImageView photoone,phototwo,photothree;
 
-        public MyViewHolderThree(View itemView) {
-            super(itemView);
-            title = (TextView) itemView.findViewById(R.id.item_three_text);
-            photoone = (ImageView) itemView.findViewById(R.id.item_three_image_one);
-            phototwo = (ImageView) itemView.findViewById(R.id.item_three_image_two);
-            photothree = (ImageView) itemView.findViewById(R.id.item_three_image_three);
-        }
-    }
+
+
+
 }

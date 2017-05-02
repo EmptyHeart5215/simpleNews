@@ -58,7 +58,7 @@ public class GetDataUtils  {
     public static void GetNews(String type, int num, int page, final NewInterface newInterface){
         OkHttpClient client =new OkHttpClient();
 
-        Request request = new Request.Builder().url("http://c.m.163.com/dlist/article/dynamic?from=" + type + "&offset="+page+"&size=10&fn=2&passport=&devId=%2FggZfgE%2FO2PR5zNnBHO3jA%3D%3D&lat=C8Z3%2FMQbaSd%2FwK6sS5lg%2Bg%3D%3D&lon=jJE0Vl3QV%2F19nxLmTTCn8Q%3D%3D&version=21.0&net=wifi&ts=1490768458&sign=XBjrUdYJYLjD6kqXCeNmi%2BBxUjUrfhmxGtvdjA3QQ3l48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=news_wx91zm&&open=&openpath=").get().build();
+        final Request request = new Request.Builder().url("http://c.m.163.com/dlist/article/dynamic?from=" + type + "&offset="+page+"&size=10&fn=2&passport=&devId=%2FggZfgE%2FO2PR5zNnBHO3jA%3D%3D&lat=C8Z3%2FMQbaSd%2FwK6sS5lg%2Bg%3D%3D&lon=jJE0Vl3QV%2F19nxLmTTCn8Q%3D%3D&version=21.0&net=wifi&ts=1490768458&sign=XBjrUdYJYLjD6kqXCeNmi%2BBxUjUrfhmxGtvdjA3QQ3l48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=news_wx91zm&&open=&openpath=").get().build();
         Call call = client.newCall(request);
         call.enqueue(new Callback()  {
             @Override
@@ -70,7 +70,7 @@ public class GetDataUtils  {
             @Override
             public void onResponse(Response response) throws IOException {
                 String string = response.body().string();
-
+                Log.e("url", "onResponse: " +request.url());
 
                 newInterface.Secuss(string);
             }

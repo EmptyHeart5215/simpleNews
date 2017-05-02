@@ -1,5 +1,6 @@
 package com.example.mysimplenew.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,10 @@ import com.example.mysimplenew.R;
 import com.example.mysimplenew.Utils.LogUtil;
 import com.example.mysimplenew.Utils.ToastUtil;
 import com.example.mysimplenew.entity.KeJiNews;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 
 import java.util.List;
@@ -41,8 +46,14 @@ public class KeJiRecyclerAdapter extends BaseAdapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public boolean setOnLongClickListener(RecyclerView.ViewHolder holder) {
 
+        return super.setOnLongClickListener(holder);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+//        super.onBindViewHolder(holder,position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +65,24 @@ public class KeJiRecyclerAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                UMWeb web = new UMWeb(newslist.get(position).getUrl());
+                UMImage image = new UMImage(context, newslist.get(position).getImgsrc());//网络图片
+                web.setTitle(newslist.get(position).getTitle());//标题
+                web.setThumb(image);  //缩略图
+                web.setDescription(newslist.get(position).getDigest());//描述
+
+                new ShareAction((Activity) context).setPlatform(SHARE_MEDIA.SINA)
+                        .withText(newslist.get(position).getTitle())
+                        .withMedia(web)
+                        .setCallback(umShareListener)
+                        .share();
+                return true;
+            }
+        });
+
             MyViewHolder myHolder = (MyViewHolder) holder;
         myHolder.title.setText(newslist.get(position).getTitle());
         String ctime = newslist.get(position).getLmodify();

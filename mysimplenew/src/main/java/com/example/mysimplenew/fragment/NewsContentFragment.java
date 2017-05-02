@@ -1,6 +1,7 @@
 package com.example.mysimplenew.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,12 +17,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mysimplenew.MainActivity;
 import com.example.mysimplenew.R;
 import com.example.mysimplenew.Utils.GetDataUtils;
 import com.example.mysimplenew.Utils.ToastUtil;
 import com.example.mysimplenew.adapter.NewsRecyclerAdapter;
 import com.example.mysimplenew.entity.NewsEntity;
 import com.example.mysimplenew.myinterface.NewInterface;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +69,8 @@ public abstract class NewsContentFragment extends Fragment {
 
         @Override
         public void onLongPress(MotionEvent e) {
-            ToastUtil.MyToast(getActivity(),"长按点击");
+            Log.e(TAG, "onLongPress: " );
+
         }
 
         @Override
@@ -87,9 +94,7 @@ public abstract class NewsContentFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                if(mGestureDetector.onTouchEvent(e)){
-                    return true;
-                }else
+
                     return false;
             }
 
@@ -140,5 +145,37 @@ public abstract class NewsContentFragment extends Fragment {
 
     public abstract void initData(final int page, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView);
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        UMShareAPI.get(getActivity()).onActivityResult(requestCode, resultCode, data);
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+            //分享开始的回调
+        }
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Log.d("plat","platform"+platform);
+
+            Toast.makeText(getActivity(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(getActivity(),platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            if(t!=null){
+                Log.d("throw","throw:"+t.getMessage());
+            }
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(getActivity(),platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    };
 
 }
