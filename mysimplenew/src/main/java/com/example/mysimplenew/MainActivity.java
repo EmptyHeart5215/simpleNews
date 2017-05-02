@@ -19,26 +19,30 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.mysimplenew.Utils.ToastUtil;
 import com.example.mysimplenew.fragment.NewsFragment;
 import com.example.mysimplenew.fragment.PhotoFragment;
 import com.example.mysimplenew.fragment.PhotoFragmentTwo;
 import com.example.mysimplenew.fragment.PhotoThree;
 import com.example.mysimplenew.fragment.SettingFragment;
 import com.example.mysimplenew.fragment.WeatherFragment;
+import com.example.mysimplenew.viewpageranimator.MyDrawerLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView menu;
-    private DrawerLayout drawerLayout;
+    private MyDrawerLayout drawerLayout;
     private Toolbar toolbar;
     private NewsFragment newsFragment;
     private FrameLayout frameLayoutAll;
@@ -50,8 +54,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String iconurl;
     private String name;
     private PhotoThree photoThree;
-    boolean tag=true;
+    boolean tag = true;
     private CircleImageView view;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +65,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         boolean networkConnected = MyApplication.isNetworkConnected(this);
         initView();
-        if (networkConnected!=true){
-            Toast.makeText(this,"当前网络不可用，请检查网络连接",Toast.LENGTH_SHORT).show();
 
-        }else {
+        if (networkConnected != true) {
+            Toast.makeText(this, "当前网络不可用，请检查网络连接", Toast.LENGTH_SHORT).show();
+
+        } else {
             Intent intent = getIntent();
             name = intent.getStringExtra("name");
             iconurl = intent.getStringExtra("iconurl");
-            SharedPreferences sharedPreferences =getSharedPreferences("user",MODE_APPEND);
-            if ( sharedPreferences.getString("name","登录错误")!="登录错误"&&  sharedPreferences.getString("iconurl","error")!="error") {
+            SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_APPEND);
+            if (sharedPreferences.getString("name", "登录错误") != "登录错误" && sharedPreferences.getString("iconurl", "error") != "error") {
                 String name = sharedPreferences.getString("name", "登录错误");
                 String iconurl = sharedPreferences.getString("iconurl", "error");
                 ImageView headphoto = (ImageView) menu.getHeaderView(0).findViewById(R.id.headphoto);
@@ -81,47 +87,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentall, newsFragment).commit();
 
         }
-        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                Log.e("addDrawerListener", "onDrawerSlide: " );
-            }
 
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                Log.e("addDrawerListener", "onDrawerOpened: " );
-
-
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                Log.e("addDrawerListener", "onDrawerClosed: " );
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-                Log.e("addDrawerListener", "onDrawerStateChanged: " );
-
-            }
-        });
 
     }
+
+    private static final String TAG = "MainActivity";
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
+        drawerLayout = (MyDrawerLayout) findViewById(R.id.activity_main);
         menu = (NavigationView) findViewById(R.id.navigation);
         frameLayoutAll = (FrameLayout) findViewById(R.id.fragmentall);
         appbar = (AppBarLayout) findViewById(R.id.appbar);
-
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent));
         menu.setNavigationItemSelectedListener(this);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+
         drawerLayout.setDrawerListener(toggle);
+
         toggle.syncState();
+
         photoThree = new PhotoThree();
         photoFragmentTwo = new PhotoFragmentTwo();
         photoFragment = new PhotoFragment();
@@ -137,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                     startActivityForResult(intent, 100);
                     tag = !tag;
-
                 }
             });
         }
@@ -145,15 +131,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode==101&&data.getStringExtra("name")!=null){
+        if (resultCode == 101 && data.getStringExtra("name") != null) {
             String name = data.getStringExtra("name");
             String iconurl = data.getStringExtra("iconurl");
             ImageView headphoto = (ImageView) menu.getHeaderView(0).findViewById(R.id.headphoto);
             TextView viewById = (TextView) menu.getHeaderView(0).findViewById(R.id.name);
-            if (name.equals("")&&iconurl.equals("")){
+            if (name.equals("") && iconurl.equals("")) {
                 headphoto.setImageResource(R.mipmap.ic_launcher);
                 viewById.setText("请点击登录");
-            }else{
+            } else {
                 Glide.with(MainActivity.this).load(iconurl).into(headphoto);
                 viewById.setText(name);
             }
@@ -167,7 +153,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     int[] chose = new int[2];
-    boolean selecktag=true;
+    boolean selecktag = true;
+
     private void itemClick(MenuItem item) {
 
         chose[1] = chose[0];//上次的id
@@ -175,27 +162,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         chose[0] = item.getItemId();//本次的id
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (chose[0]) {
-
             case R.id.news:
-
-                fragmentTransaction.replace(R.id.fragmentall, newsFragment,"newsFragment");
+                fragmentTransaction.replace(R.id.fragmentall, newsFragment, "newsFragment");
                 toolbar.setTitle("新闻");
-                selecktag=true;
+                selecktag = true;
                 break;
             case R.id.photos:
-                fragmentTransaction.replace(R.id.fragmentall, photoThree,"photoThree");
+                fragmentTransaction.replace(R.id.fragmentall, photoThree, "photoThree");
                 toolbar.setTitle("图片");
-                selecktag=false;
+                selecktag = false;
                 break;
             case R.id.setting:
-                Intent settingintent =new Intent(this,SettingActivity.class);
-                startActivityForResult(settingintent,100);
-
+                Intent settingintent = new Intent(this, SettingActivity.class);
+                startActivityForResult(settingintent, 100);
                 break;
             case R.id.weather:
                 Intent intent = new Intent(this, WeatherActivity.class);
                 startActivity(intent);
-
                 break;
         }
         fragmentTransaction.commit();
@@ -203,13 +186,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    float x;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        Log.e(TAG, "onTouchEvent: " );
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x = ev.getX();
+                Log.e(TAG, "ACTION_DOWN: "+x );
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (x > 200) {
+                    Log.e(TAG, "ACTION_MOVE: "+x );
+                    return false;
+                } else return true;
+        }
+
+        return super.onTouchEvent(ev);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         if (MyApplication.isNetworkConnected(this) == true) {
-            if (selecktag){
+            if (selecktag) {
                 menu.setCheckedItem(R.id.news);
-            }else {
+            } else {
                 menu.setCheckedItem(R.id.photos);
             }
         }

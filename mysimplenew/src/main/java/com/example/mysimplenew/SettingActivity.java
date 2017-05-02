@@ -3,7 +3,9 @@ package com.example.mysimplenew;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -128,7 +130,6 @@ public class SettingActivity extends AppCompatActivity {
                intent.putExtra("iconurl",iconurl);
                 setUserPerform(settingimage,settingname,name,iconurl);
                layout.setVisibility(View.VISIBLE);
-
 
 
            }else {

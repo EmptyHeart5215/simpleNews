@@ -18,6 +18,7 @@ import com.example.mysimplenew.fragment.news.LiShiFragment;
 import com.example.mysimplenew.fragment.news.SheHuiFragment;
 import com.example.mysimplenew.fragment.news.TiYuFragment;
 import com.example.mysimplenew.fragment.news.YunKeTangFraagment;
+
 import com.example.mysimplenew.viewpageranimator.ZoomOutPageTransformer;
 
 
@@ -52,7 +53,7 @@ public class NewsFragment extends Fragment {
         viewPager.setPageTransformer(true,new ZoomOutPageTransformer());
 
         String[] cType = new String[]{
-                "足球天地", "云课堂", "社会新闻","往事回忆", "科技大事", "历史回顾", "体育频道"
+                "社会百事", "云课堂", "热门焦点","军事天地", "科技大事", "历史回顾", "体育频道"
         };
         //T1348649145984     T1348648037603    T1368497029546    T1348648141035   T1467284926140  T1421997195219  T1350383429665
         //T1351233117091
