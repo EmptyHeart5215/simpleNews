@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:paddingTop="80dp"
+    android:layout_centerHorizontal="true"
+    android:gravity="center"
+    android:id="@+id/photo"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/wximage"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+
+        android:src="@drawable/wechat" />
+    <ImageView
+        android:id="@+id/qqimage"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+
+        android:src="@drawable/tencent_qq_90px_1107984_easyicon" />
+
+</LinearLayout>
+
+<!--<Button-->
+    <!--android:background="@drawable/but"-->
+    <!--android:id="@+id/denglu"-->
+    <!--android:layout_below="@id/photo"-->
+    <!--android:text="登录"-->
+    <!--android:layout_margin="20dp"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_marginRight="20dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+
+</RelativeLayout>

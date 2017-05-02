@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/itemback"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:paddingLeft="1dp"
+                android:paddingBottom="1dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/item_two"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_launcher" />
+
+            <ImageView
+                android:paddingLeft="1dp"
+                android:paddingBottom="1dp"
+
+                android:scaleType="centerCrop"
+                android:id="@+id/item_three"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_weight="2">
+
+            <ImageView
+                android:paddingLeft="1dp"
+                android:paddingBottom="1dp"
+
+                android:scaleType="centerCrop"
+                android:id="@+id/item_one"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_margin="8dp"
+        android:paddingLeft="5dp"
+        android:background="#fff"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#d000"
+        android:id="@+id/item_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="图片故事：一个人的学校" />
+
+
+</LinearLayout>

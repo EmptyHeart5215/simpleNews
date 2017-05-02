@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/weathback"
+    android:orientation="vertical">
+ <LinearLayout
+     android:id="@+id/linear"
+     android:visibility="invisible"
+     android:layout_width="match_parent"
+     android:orientation="vertical"
+     android:layout_height="match_parent">
+     <RelativeLayout
+
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:paddingLeft="10dp"
+         android:paddingTop="10dp">
+
+         <TextView
+             android:id="@+id/localtext"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:text=" "
+
+             android:textColor="#FFF"
+             android:textSize="20sp" />
+
+         <ImageView
+             android:id="@+id/localimage"
+             android:layout_width="20dp"
+             android:layout_height="wrap_content"
+             android:layout_toRightOf="@id/localtext"
+             android:paddingLeft="5dp"
+             android:src="@drawable/local" />
+     </RelativeLayout>
+
+     <RelativeLayout
+         android:layout_width="wrap_content"
+         android:layout_height="0dp"
+         android:layout_weight="1.5">
+
+         <LinearLayout
+             android:id="@+id/wenduli"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+
+             <LinearLayout
+                 android:layout_width="wrap_content"
+
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+
+                 <TextView
+                     android:id="@+id/wendutext"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingLeft="10dp"
+                     android:text=" "
+                     android:textColor="#fff"
+                     android:textSize="90sp" />
+
+                 <TextView
+                     android:layout_width="30dp"
+                     android:layout_height="match_parent"
+                     android:gravity="top"
+                     android:text="0"
+                     android:textColor="#FFF"
+                     android:textSize="30sp" />
+             </LinearLayout>
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="right"
+                 android:gravity="right"
+                 android:paddingRight="10dp"
+                 android:text="风 力"
+                 android:textColor="#FFF"
+                 android:textSize="20sp" />
+
+
+         </LinearLayout>
+
+
+         <TextView
+             android:id="@+id/tianqi"
+             android:layout_width="60dp"
+             android:layout_height="wrap_content"
+             android:layout_toRightOf="@id/wenduli"
+             android:gravity="right"
+             android:paddingTop="15dp"
+             android:text=" "
+             android:textColor="#fff"
+             android:textSize="30sp" />
+
+         <LinearLayout
+             android:id="@+id/jiangyuall"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignEnd="@id/tianqi"
+             android:layout_alignRight="@id/tianqi"
+             android:layout_below="@id/tianqi"
+             android:layout_marginTop="14dp"
+             android:orientation="horizontal">
+
+             <ImageView
+                 android:layout_width="20dp"
+                 android:layout_height="20dp"
+                 android:src="@drawable/yu" />
+
+             <TextView
+                 android:id="@+id/jiangyu"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text=" "
+                 android:textColor="#FFF"
+                 android:textSize="20sp" />
+
+         </LinearLayout>
+
+         <TextView
+             android:id="@+id/fengli"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignBottom="@+id/wenduli"
+             android:layout_toEndOf="@+id/wenduli"
+             android:layout_toRightOf="@+id/wenduli"
+             android:gravity="left"
+             android:paddingLeft="20dp"
+             android:text=" "
+             android:textColor="#FFF"
+             android:textSize="24sp" />
+
+     </RelativeLayout>
+
+     <View
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:layout_weight="3"></View>
+
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:padding="10dp"
+         android:paddingBottom="5dp">
+
+         <RelativeLayout
+             android:layout_width="0dp"
+             android:layout_height="90dp"
+             android:layout_weight="1"
+             android:background="#1333"
+             android:paddingRight="10dp">
+
+             <TextView
+                 android:id="@+id/today"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="今天"
+                 android:textColor="#fff"
+                 android:textSize="20sp" />
+
+             <TextView
+                 android:id="@+id/todaytianqi"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentBottom="true"
+                 android:layout_alignParentLeft="true"
+                 android:layout_toEndOf="@id/today"
+
+                 android:layout_toRightOf="@id/today"
+
+                 android:text=" "
+                 android:textColor="#fff"
+                 android:textSize="20sp" />
+
+             <TextView
+                 android:id="@+id/todaywendu"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignParentTop="true"
+                 android:text=" "
+                 android:textColor="#fff"
+                 android:textSize="20sp" />
+
+             <ImageView
+                 android:id="@+id/todaytupian"
+                 android:layout_width="20dp"
+                 android:layout_height="20dp"
+                 android:src="@drawable/qing"
+
+                 android:layout_alignTop="@id/todaytianqi"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignParentEnd="true"
+                 android:layout_marginRight="11dp"
+                 android:layout_marginEnd="11dp" />
+
+         </RelativeLayout>
+
+         <View
+             android:layout_width="1sp"
+             android:layout_height="match_parent"
+             android:background="#5000"></View>
+
+         <RelativeLayout
+             android:layout_width="0dp"
+             android:layout_height="90dp"
+             android:layout_weight="1"
+             android:paddingLeft="10dp">
+
+             <TextView
+                 android:id="@+id/tomm"
+                 android:layout_width="wrap_content"
+
+                 android:layout_height="wrap_content"
+                 android:text="明天"
+                 android:textColor="#fff"
+                 android:textSize="20sp" />
+
+             <TextView
+                 android:id="@+id/tommtianqi"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentBottom="true"
+                 android:layout_alignParentLeft="true"
+                 android:layout_toEndOf="@id/tomm"
+
+                 android:layout_toRightOf="@id/tomm"
+
+                 android:text=" "
+                 android:textColor="#fff"
+                 android:textSize="20sp" />
+
+             <TextView
+                 android:id="@+id/tommwendu"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignParentTop="true"
+                 android:text=" "
+                 android:textColor="#fff"
+                 android:textSize="20sp" />
+
+             <ImageView
+                 android:id="@+id/tommtupian"
+                 android:layout_width="20dp"
+                 android:layout_height="20dp"
+                 android:src="@drawable/qing"
+
+                 android:layout_alignParentBottom="true"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignParentEnd="true"
+                 android:layout_marginRight="15dp"
+                 android:layout_marginEnd="15dp" />
+
+         </RelativeLayout>
+     </LinearLayout>
+ </LinearLayout>
+
+
+</LinearLayout>
