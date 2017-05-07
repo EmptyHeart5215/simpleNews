@@ -76,6 +76,8 @@ public class WeatherActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                         200);//自定义的code
                 Log.e(TAG, "onCreate: 权限申请中" );
+            }{
+                initData();
             }
         }
     }

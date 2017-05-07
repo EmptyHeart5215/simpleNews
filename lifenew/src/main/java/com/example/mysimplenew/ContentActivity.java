@@ -59,7 +59,7 @@ public class ContentActivity extends AppCompatActivity{
     private static final String TAG = "ContentActivity";
     private WebView webView;
     private ImageView image;
-
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -45,9 +45,7 @@
             android:value="22de42cf6b5b6b61d1133208ec319f77">
 
         </meta-data>
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="58d914f4f29d983544000cf9"></meta-data>
+
         <meta-data
             android:name="com.example.mysimplenew.mode.MyGlideMode"
             android:value="GlideModule" />
@@ -100,6 +98,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58d914f4f29d983544000cf9"></meta-data>
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="fbaec6700bebd32db1e4e50e777b7b58">
+        </meta-data>
     </application>
 
 </manifest>

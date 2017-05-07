@@ -24,6 +24,8 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 
+import org.jsoup.nodes.Document;
+
 import java.util.List;
 
 /**

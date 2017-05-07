@@ -54,7 +54,7 @@ public class SheHuiFragment  extends NewsContentFragment {
                                     recyclerView.setAdapter(adapter);
 
                                 } else {
-                                    ToastUtil.MyToast(getActivity(), "数据获取成功");
+//                                    ToastUtil.MyToast(getActivity(), "数据获取成功");
                                     recyclerView.getAdapter().notifyDataSetChanged();
                                     refreshLayout.setRefreshing(false);
                                 }
