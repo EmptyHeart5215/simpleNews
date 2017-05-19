@@ -45,77 +45,31 @@ public abstract class NewsContentFragment extends Fragment {
     private SwipeRefreshLayout refreshLayout;
     private int page;
     private GridLayoutManager manager;
-    GestureDetector mGestureDetector=new GestureDetector(new GestureDetector.OnGestureListener() {
-        @Override
-        public boolean onDown(MotionEvent e) {
 
-            return false;
-        }
-
-        @Override
-        public void onShowPress(MotionEvent e) {
-
-        }
-
-        @Override
-        public boolean onSingleTapUp(MotionEvent e) {
-            return false;
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            return false;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent e) {
-            Log.e(TAG, "onLongPress: " );
-
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            return false;
-        }
-    });
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         page = 1;
         if (viewGroup == null) {
+            Log.e("hengping", "onCreateView: 横屏了" );
             viewGroup = (ViewGroup) View.inflate(getActivity(), R.layout.newsblewcontent, null);
             recyclerView = (RecyclerView) viewGroup.findViewById(R.id.newscontentrecycler);
             refreshLayout = (SwipeRefreshLayout) viewGroup.findViewById(R.id.swip);
             manager = new GridLayoutManager(getContext(), 1);
             recyclerView.setLayoutManager(manager);
             initData(page, refreshLayout, recyclerView);
+        }else {
+            return viewGroup;
         }
-
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-
-                    return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+
                     int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
-                    if (lastVisibleItemPosition == recyclerView.getAdapter().getItemCount() - 1) {
+
+                    if (recyclerView.getAdapter()!=null&&lastVisibleItemPosition == recyclerView.getAdapter().getItemCount() - 1) {
                         page++;
                         initData(page, refreshLayout, recyclerView);
                     }
@@ -132,6 +86,7 @@ public abstract class NewsContentFragment extends Fragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                if (viewGroup==null)return;
                 if (refreshLayout.isRefreshing()) {
                     page++;
                     initData(page, refreshLayout, recyclerView);

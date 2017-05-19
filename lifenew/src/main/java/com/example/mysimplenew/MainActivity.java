@@ -101,7 +101,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menu = (NavigationView) findViewById(R.id.navigation);
         frameLayoutAll = (FrameLayout) findViewById(R.id.fragmentall);
         appbar = (AppBarLayout) findViewById(R.id.appbar);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent));
+
         menu.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
